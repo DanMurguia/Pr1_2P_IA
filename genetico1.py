@@ -3,9 +3,9 @@ import math
 import operator
 
 lista_cromosomas =[]
-n_cromosomas = 8
+n_cromosomas = 6
 evaluacion_ordenada = []
-maxOmin=1
+maxOmin=2
 intervalo=4
 
 def crear_cromosomas(n_cromosomas):
@@ -101,8 +101,6 @@ def seleccionar(evaluacion_ordenada,lista_cromosomas,maxOmin):
 			pos+=1
 			print(lista_cromosomas)
 			print(evaluacion_ordenada)
-	if(maxOmin==1):
-		lista_cromosomas.reverse()
 	return lista_cromosomas
 
 def lista_a_decimal(lista):
@@ -111,7 +109,7 @@ def lista_a_decimal(lista):
     return numero
 
 def cruzamiento(lista_cromosomas, intervalo,n_cromosomas,cont,largo):
-	if (cont+1)<=largo:
+	if (cont+1)<largo:
 		nuevo_cromosoma=[]
 		pos=0
 		while pos<intervalo:
@@ -132,6 +130,7 @@ def cruzamiento(lista_cromosomas, intervalo,n_cromosomas,cont,largo):
 			nuevo_cromosoma.append(lista_cromosomas[cont][pos])
 			pos+=1
 		print(nuevo_cromosoma)
+		nuevo_cromosoma=mutacion(nuevo_cromosoma)
 		lista_cromosomas.append(nuevo_cromosoma)
 		print(lista_cromosomas)
 		cruzamiento(lista_cromosomas,intervalo,n_cromosomas,cont+2,largo)
