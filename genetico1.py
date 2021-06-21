@@ -3,7 +3,7 @@ import math
 import operator
 
 lista_cromosomas =[]
-n_cromosomas = 6
+n_cromosomas = 8
 evaluacion_ordenada = []
 maxOmin=2
 intervalo=4
@@ -134,6 +134,15 @@ def cruzamiento(lista_cromosomas, intervalo,n_cromosomas,cont,largo):
 		lista_cromosomas.append(nuevo_cromosoma)
 		print(lista_cromosomas)
 		cruzamiento(lista_cromosomas,intervalo,n_cromosomas,cont+2,largo)
+        
+def mutacion(cromosoma):
+    pos = random.randint(0,7)
+    if cromosoma[pos] == 0:
+        cromosoma[pos] = 1
+    elif cromosoma[pos] == 1:
+        cromosoma[pos] = 0
+    print(lista_a_decimal(cromosoma))
+    return cromosoma
 
 if __name__ == '__main__':
     lista_cromosomas=crear_cromosomas(n_cromosomas)
