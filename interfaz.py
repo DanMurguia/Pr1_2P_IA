@@ -39,12 +39,12 @@ class MainWindow(tk.Frame):
                            background='#6B0002',foreground = '#968118',variable=self.var_funcion)
         rad0.grid(row=2, column=0)
         
-        rad1 = Radiobutton(self,text='sin(x) * 40', value=3,
+        rad1 = Radiobutton(self,text='sin(x) * 40', value=2,
                            font=('Arial',14,'bold italic'), 
                            background='#6B0002',foreground = '#968118',variable=self.var_funcion)
         rad1.grid(row=2, column=1) 
         
-        rad2 = Radiobutton(self,text='cos(x)+x', value=2,
+        rad2 = Radiobutton(self,text='cos(x)+x', value=3,
                            font=('Arial',14,'bold italic'),
                            background='#6B0002',foreground = '#968118',variable=self.var_funcion)
         rad2.grid(row=2, column=2)
