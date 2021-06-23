@@ -2,7 +2,15 @@ import random
 import math
 import operator
 
-def crear_cromosomas(n_cromosomas, lista_cromosomas):
+lista_cromosomas = []
+n_cromosomas = 8
+evaluacion_ordenada = []
+maxOmin = 1
+intervalo = 4
+n_gen = 3
+funcion=4
+
+def crear_cromosomas(n_cromosomas):
     while n_cromosomas > 0:
         nuevo_cromosoma = []
         n = random.randint(0, 255)
@@ -16,7 +24,7 @@ def crear_cromosomas(n_cromosomas, lista_cromosomas):
     return lista_cromosomas
 
 
-def evaluacion(funcion, evaluacion_ordenada,lista_cromosomas):
+def evaluacion(funcion, evaluacion_ordenada):
     print("######Evaluando individuos######")
     if len(evaluacion_ordenada) > 0:
         evaluacion_ordenada.clear()
@@ -91,8 +99,9 @@ def seleccionar(evaluacion_ordenada, lista_cromosomas, maxOmin):
                 lista_cromosomas.pop(evaluacion_ordenada[0][0] - pos)
             else:
                 lista_cromosomas.pop(evaluacion_ordenada[0][0])
-            evaluacion_ordenada.pop(0)
             pos += 1
+            evaluacion_ordenada.pop(0)
+
             print(lista_cromosomas)
             print(evaluacion_ordenada)
     elif(maxOmin == 2):
@@ -116,8 +125,9 @@ def lista_a_decimal(lista):
 
 
 def cruzamiento(lista_cromosomas, intervalo, n_cromosomas, cont, largo):
-    print("#######CRUZAMIENTO#######")
     if (cont+1)<largo:
+        print("#######CRUZAMIENTO#######")
+
         nuevo_cromosoma=[]
         pos=0
         while pos<intervalo:
@@ -142,7 +152,7 @@ def cruzamiento(lista_cromosomas, intervalo, n_cromosomas, cont, largo):
         lista_cromosomas.append(nuevo_cromosoma)
         print(lista_cromosomas)
         cruzamiento(lista_cromosomas,intervalo,n_cromosomas,cont+2,largo)
-        
+
 def mutacion(cromosoma):
     pos = random.randint(0,7)
     if cromosoma[pos] == 0:
@@ -151,18 +161,20 @@ def mutacion(cromosoma):
         cromosoma[pos] = 0
     return cromosoma
 
-def init(funcion,modo,cromo,gens,x):
-    lista_cromosomas = []
-    func = funcion
-    n_cromosomas = 8
-    evaluacion_ordenada = []
-    maxOmin = modo
-    intervalo = x
-    n_gen = gens
-    lista_cromosomas=crear_cromosomas(n_cromosomas, lista_cromosomas)
+def resultado(lista_cromosomas,evaluacion_ordenada,funcion):
+    evaluacion_ordenada=evaluacion(funcion, evaluacion_ordenada)
+    if(maxOmin==1):
+        print(lista_cromosomas[evaluacion_ordenada[-1][0]])##imprime el ultimo
+    elif(maxOmin==2):
+        print(lista_cromosomas[evaluacion_ordenada[0][0]])
+
+if __name__ == '__main__':
+
+    lista_cromosomas=crear_cromosomas(n_cromosomas)
     print(lista_cromosomas)
     for i in range(0,n_gen):
-        evaluacion_ordenada=evaluacion(modo, evaluacion_ordenada,lista_cromosomas)
+        evaluacion_ordenada=evaluacion(funcion, evaluacion_ordenada)
         lista_cromosomas=seleccionar(evaluacion_ordenada,lista_cromosomas,maxOmin)
         print(lista_cromosomas)
         cruzamiento(lista_cromosomas,intervalo,n_cromosomas,0,len(lista_cromosomas))
+    resultado(lista_cromosomas,evaluacion_ordenada,funcion)
